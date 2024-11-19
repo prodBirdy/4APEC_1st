@@ -1599,6 +1599,21 @@
           }
         }
       },
+      "Backend/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore": "9.0.0",
+          "Microsoft.EntityFrameworkCore.SqlServer": "9.0.0",
+          "Model": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Backend.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Backend.dll": {}
+        }
+      },
       "Model/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v9.0",
@@ -4712,6 +4727,11 @@
         "useSharedDesignerContext.txt"
       ]
     },
+    "Backend/1.0.0": {
+      "type": "project",
+      "path": "../Backend/Backend.csproj",
+      "msbuildProject": "../Backend/Backend.csproj"
+    },
     "Model/1.0.0": {
       "type": "project",
       "path": "../Model/Model.csproj",
@@ -4720,6 +4740,7 @@
   },
   "projectFileDependencyGroups": {
     "net9.0": [
+      "Backend >= 1.0.0",
       "Microsoft.EntityFrameworkCore >= 9.0.0",
       "Microsoft.EntityFrameworkCore.SqlServer >= 9.0.0",
       "Microsoft.EntityFrameworkCore.Tools >= 9.0.0",
@@ -4752,6 +4773,9 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "projectReferences": {
+            "/Users/jonasvogel/RiderProjects/4APEC_1st/Backend/Backend.csproj": {
+              "projectPath": "/Users/jonasvogel/RiderProjects/4APEC_1st/Backend/Backend.csproj"
+            },
             "/Users/jonasvogel/RiderProjects/4APEC_1st/Model/Model.csproj": {
               "projectPath": "/Users/jonasvogel/RiderProjects/4APEC_1st/Model/Model.csproj"
             }

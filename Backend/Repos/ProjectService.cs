@@ -14,7 +14,6 @@ public class ProjectService<T> : IProjectService<T> where T : class
     private readonly BackendDbContext _context;
     private readonly DbSet<T> _dbSet;
 
-
     /// <summary>
     /// Initializes a new instance of the Repository class.
     /// </summary>
