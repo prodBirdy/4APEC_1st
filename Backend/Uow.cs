@@ -10,11 +10,11 @@ public class Uow
     private ProjectService<Project> _projectRepository;
     private ProjectService<TaskEntries> _taskRepository;
     private ProjectService<TimeEntries> _timeEntryRepository;
-    
+
     /// <summary>
     /// Initializes a new instance of the UnitOfWork class.
     /// </summary>
-    public Uow( )
+    public Uow()
     {
         _context = new BackendDbContext();
     }
@@ -23,13 +23,13 @@ public class Uow
     /// Gets the user repository.
     /// </summary>
     public ProjectService<User> Users => _userRepository ??= new ProjectService<User>(_context);
-    
+
     public ProjectService<Project> Projects => _projectRepository ??= new ProjectService<Project>(_context);
-    
+
     public ProjectService<TaskEntries> Tasks => _taskRepository ??= new ProjectService<TaskEntries>(_context);
-    
+
     public ProjectService<TimeEntries> Times => _timeEntryRepository ??= new ProjectService<TimeEntries>(_context);
-    
+
     /// <summary>
     /// Completes the DB transactions.
     /// </summary>
@@ -43,5 +43,4 @@ public class Uow
     {
         _context.Dispose();
     }
-    
 }

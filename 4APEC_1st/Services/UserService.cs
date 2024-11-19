@@ -14,7 +14,8 @@ namespace APEC_INF.Services;
 public class UserService
 {
     private readonly Uow _unitOfWork;
-    public UserService( Uow unitOfWork)
+
+    public UserService(Uow unitOfWork)
     {
         _unitOfWork = unitOfWork;
     }
@@ -34,15 +35,14 @@ public class UserService
             UserId = id,
             Username = username,
             Email = email,
-            PasswordHash = GenerateHash(password , id, out _),
-
+            PasswordHash = GenerateHash(password, id, out _),
         };
 
         _unitOfWork.Users.Add(user);
         _unitOfWork.Complete();
         return Task.FromResult(true);
     }
-    
+
     /// <summary>
     /// Logs in a user with the given username and password.
     /// </summary>
@@ -61,7 +61,7 @@ public class UserService
     /// Generates a hash for the given password and user ID.
     /// </summary>
     /// <returns>The generated hash.</returns>
-    private string GenerateHash(string password,  Guid userId, out string salt)
+    private string GenerateHash(string password, Guid userId, out string salt)
     {
         salt = new string(userId.ToString().Skip(5).Take(10).ToArray());
         using var sha512 = SHA512.Create();
@@ -71,7 +71,7 @@ public class UserService
         {
             hash = sha512.ComputeHash(hash);
         }
+
         return Convert.ToBase64String(hash);
     }
-
 }

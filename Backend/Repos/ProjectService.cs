@@ -18,7 +18,6 @@ public class ProjectService<T> : IProjectService<T> where T : class
     /// Initializes a new instance of the Repository class.
     /// </summary>
     /// <param name="context">The database context.</param>
-
     public ProjectService(BackendDbContext context)
     {
         _context = context;
