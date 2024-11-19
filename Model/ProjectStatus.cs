@@ -1,7 +1,9 @@
-public enum TaskStatus
+namespace Model;
+
+public enum ProjectStatus
 {
     NotStarted,
     InProgress,
     Completed,
     OnHold
-} 
+}
