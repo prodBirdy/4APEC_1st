@@ -1,0 +1,12 @@
+/Users/jonasvogel/RiderProjects/4APEC_1st/DTO/bin/Debug/net9.0/DTO.deps.json
+/Users/jonasvogel/RiderProjects/4APEC_1st/DTO/bin/Debug/net9.0/DTO.dll
+/Users/jonasvogel/RiderProjects/4APEC_1st/DTO/bin/Debug/net9.0/DTO.pdb
+/Users/jonasvogel/RiderProjects/4APEC_1st/DTO/obj/Debug/net9.0/DTO.GeneratedMSBuildEditorConfig.editorconfig
+/Users/jonasvogel/RiderProjects/4APEC_1st/DTO/obj/Debug/net9.0/DTO.AssemblyInfoInputs.cache
+/Users/jonasvogel/RiderProjects/4APEC_1st/DTO/obj/Debug/net9.0/DTO.AssemblyInfo.cs
+/Users/jonasvogel/RiderProjects/4APEC_1st/DTO/obj/Debug/net9.0/DTO.csproj.CoreCompileInputs.cache
+/Users/jonasvogel/RiderProjects/4APEC_1st/DTO/obj/Debug/net9.0/DTO.sourcelink.json
+/Users/jonasvogel/RiderProjects/4APEC_1st/DTO/obj/Debug/net9.0/DTO.dll
+/Users/jonasvogel/RiderProjects/4APEC_1st/DTO/obj/Debug/net9.0/refint/DTO.dll
+/Users/jonasvogel/RiderProjects/4APEC_1st/DTO/obj/Debug/net9.0/DTO.pdb
+/Users/jonasvogel/RiderProjects/4APEC_1st/DTO/obj/Debug/net9.0/ref/DTO.dll

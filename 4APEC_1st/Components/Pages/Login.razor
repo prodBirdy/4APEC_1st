@@ -1,0 +1,47 @@
+@page "/login"
+@using APEC_INF.Services
+@using DTO
+
+@inject UserService UserService
+
+@rendermode InteractiveServer
+<h3>Login</h3>
+<EditForm FormName="Login" Model="@loginDto" OnValidSubmit="HandleLogin">
+    <DataAnnotationsValidator/>
+    <div class="mb-3">
+        <label class="form-label">Username:</label>
+        <InputText @bind-Value="loginDto.Username" class="form-control"/>
+        <ValidationMessage For="@(() => loginDto.Username)" class="text-danger"/>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Password:</label>
+        <InputText @bind-Value="loginDto.Password" type="password" class="form-control"/>
+        <ValidationMessage For="@(() => loginDto.Password)" class="text-danger"/>
+    </div>
+    <button type="submit" class="btn btn-primary mt-3">Login</button>
+</EditForm>
+
+@if (loginSuccess.HasValue)
+{
+    <div class="mt-3">
+        <p class="@(loginSuccess.Value ? "text-success" : "text-danger")">
+            @(loginSuccess.Value ? "Login successful" : "Login failed")
+        </p>
+    </div>
+}
+
+@code {
+    private LoginDto loginDto = new LoginDto();
+    private bool? loginSuccess;
+
+    private async Task HandleLogin()
+    {
+        loginSuccess = await UserService.Login(loginDto.Username, loginDto.Password);
+        if (loginSuccess.Value)
+        {
+            loginDto = new LoginDto();
+            StateHasChanged();
+        }
+    }
+
+}

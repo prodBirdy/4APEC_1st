@@ -1,10 +1,17 @@
 using _4APEC_1st.Components;
+using APEC_INF.Services;
+using BL;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
+
+builder.Services.AddSingleton<Uow>(new Uow());
+
+builder.Services.AddScoped<UserService>();
 
 var app = builder.Build();
 

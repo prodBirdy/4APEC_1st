@@ -1614,6 +1614,16 @@
           "bin/placeholder/Backend.dll": {}
         }
       },
+      "DTO/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "compile": {
+          "bin/placeholder/DTO.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/DTO.dll": {}
+        }
+      },
       "Model/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v9.0",
@@ -4732,6 +4742,11 @@
       "path": "../Backend/Backend.csproj",
       "msbuildProject": "../Backend/Backend.csproj"
     },
+    "DTO/1.0.0": {
+      "type": "project",
+      "path": "../DTO/DTO.csproj",
+      "msbuildProject": "../DTO/DTO.csproj"
+    },
     "Model/1.0.0": {
       "type": "project",
       "path": "../Model/Model.csproj",
@@ -4741,6 +4756,7 @@
   "projectFileDependencyGroups": {
     "net9.0": [
       "Backend >= 1.0.0",
+      "DTO >= 1.0.0",
       "Microsoft.EntityFrameworkCore >= 9.0.0",
       "Microsoft.EntityFrameworkCore.SqlServer >= 9.0.0",
       "Microsoft.EntityFrameworkCore.Tools >= 9.0.0",
@@ -4775,6 +4791,9 @@
           "projectReferences": {
             "/Users/jonasvogel/RiderProjects/4APEC_1st/Backend/Backend.csproj": {
               "projectPath": "/Users/jonasvogel/RiderProjects/4APEC_1st/Backend/Backend.csproj"
+            },
+            "/Users/jonasvogel/RiderProjects/4APEC_1st/DTO/DTO.csproj": {
+              "projectPath": "/Users/jonasvogel/RiderProjects/4APEC_1st/DTO/DTO.csproj"
             },
             "/Users/jonasvogel/RiderProjects/4APEC_1st/Model/Model.csproj": {
               "projectPath": "/Users/jonasvogel/RiderProjects/4APEC_1st/Model/Model.csproj"

@@ -23,7 +23,7 @@ public class UserService
     /// Registers a new user with the given username, password, and role.
     /// </summary>
     /// <returns>True if registration is successful, false otherwise.</returns>
-    public Task<bool> Register(string username, string password, string roleName)
+    public Task<bool> Register(string username, string password, string email)
     {
         if (_unitOfWork.Users.GetAll().Any(u => u.Username == username))
             return Task.FromResult(false);
@@ -33,6 +33,7 @@ public class UserService
         {
             UserId = id,
             Username = username,
+            Email = email,
             PasswordHash = GenerateHash(password , id, out _),
 
         };

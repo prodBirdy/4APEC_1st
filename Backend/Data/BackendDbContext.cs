@@ -12,8 +12,6 @@ public class BackendDbContext : DbContext
         base.OnConfiguring(optionsBuilder);
         optionsBuilder.UseSqlServer("Server=localhost,1433;Database=TimeTrack;User Id=sa;Password=YourStrongPassword123;TrustServerCertificate=true;");
     }
-    
-    
     public DbSet<User> Users { get; set; }
     public DbSet<Project> Projects { get; set; }
     public DbSet<TaskEntries> Tasks { get; set; }

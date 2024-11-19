@@ -1,0 +1,51 @@
+@page "/register"
+@using APEC_INF.Services
+@using DTO
+@inject UserService UserService
+@rendermode InteractiveServer
+
+<h3>Register</h3>
+<EditForm FormName="Register" Model="@registerDto" OnValidSubmit="HandleRegister">
+    <DataAnnotationsValidator/>
+    <div class="mb-3">
+        <label class="form-label">Email:</label>
+        <InputText @bind-Value="registerDto.Email" class="form-control"/>
+        <ValidationMessage For="@(() => registerDto.Email)" class="text-danger"/>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Username:</label>
+        <InputText @bind-Value="registerDto.Username" class="form-control"/>
+        <ValidationMessage For="@(() => registerDto.Username)" class="text-danger"/>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Password:</label>
+        <InputText @bind-Value="registerDto.Password" type="password" class="form-control"/>
+        <ValidationMessage For="@(() => registerDto.Password)" class="text-danger"/>
+    </div>
+    <button type="submit" class="btn btn-primary">Register</button>
+</EditForm>
+
+@if (registrationSuccess.HasValue)
+{
+    <div class="mt-3">
+        <p class="@(registrationSuccess.Value ? "text-success" : "text-danger")">
+            @(registrationSuccess.Value ? "Registration successful" : "Registration failed")
+        </p>
+    </div>
+}
+
+@code {
+    private RegisterDTO registerDto = new RegisterDTO();
+    private bool? registrationSuccess;
+
+    private async Task HandleRegister()
+    {
+        registrationSuccess = await UserService.Register(registerDto.Username, registerDto.Password, registerDto.Email);
+        if (registrationSuccess.Value)
+        {
+            registerDto = new RegisterDTO();
+            StateHasChanged();
+        }
+    }
+
+}
