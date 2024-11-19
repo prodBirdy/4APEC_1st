@@ -10,7 +10,7 @@ public class BackendDbContext : DbContext
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         base.OnConfiguring(optionsBuilder);
-        optionsBuilder.UseSqlServer("Server=localhost,1433;Database=master;User Id=sa;Password=YourStrongPassword123;");
+        optionsBuilder.UseSqlServer("Server=localhost,1433;Database=TimeTrack;User Id=sa;Password=YourStrongPassword123;TrustServerCertificate=true;");
     }
     
     
