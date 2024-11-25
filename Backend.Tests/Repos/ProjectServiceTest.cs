@@ -1,4 +1,7 @@
+using System;
+using System.Threading.Tasks;
 using APEC_INF.Data;
+using BL;
 using BL.Data;
 using BL.Repos;
 using JetBrains.Annotations;
@@ -12,23 +15,30 @@ namespace Backend.Tests.Repos;
 public class ProjectServiceTest
 {
     BackendDbContext context = new BackendDbContext();
-
+    Uow uow = new Uow();
 
     [Fact()]
-    public void AddUserTest()
+    public async Task AddUserTest()
     {
-        ProjectService<User> uService = new ProjectService<User>(context);
-        
         User user = new User();
         user.Username = "test";
         user.PasswordHash = "test";
         user.Email = "test@test.com";
-        uService.Add(user);
-        Assert.Equal(user, context.Users.Find(user.Username));
-        context.Users.Remove(user);
-        context.SaveChanges();
+        user.UserId = Guid.NewGuid();
+        user.Email = "test@test.com";
         
+        uow.Users.Add(user);
+        uow.Complete();
+        
+        User? dbUser = await context.Users.FindAsync(user.UserId);
+        Assert.NotNull(dbUser);
+        Assert.Equal(user.UserId, dbUser!.UserId);
+        
+        // Teardown
+         uow.Users.Delete(user);
+         uow.Complete();
     }
+    
     
     
 }
