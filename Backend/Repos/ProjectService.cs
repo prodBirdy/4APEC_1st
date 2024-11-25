@@ -45,26 +45,29 @@ public class ProjectService<T> : IProjectService<T> where T : class
     /// Adds a new entity to the database.
     /// </summary>
     /// <param name="entity">The entity to add.</param>
-    public void Add(T entity)
+    public bool Add(T entity)
     {
         _dbSet.Add(entity);
+        return _context.SaveChanges() > 0;
     }
 
     /// <summary>
     /// Updates an existing entity in the database.
     /// </summary>
     /// <param name="entity">The entity to update.</param>
-    public void Update(T entity)
+    public bool Update(T entity)
     {
         _dbSet.Update(entity);
+        return _context.SaveChanges() > 0;
     }
 
     /// <summary>
     /// Deletes an entity from the database.
     /// </summary>
     /// <param name="entity">The entity to delete.</param>
-    public void Delete(T entity)
+    public bool Delete(T entity)
     {
         _dbSet.Remove(entity);
+        return _context.SaveChanges() > 0;
     }
 }

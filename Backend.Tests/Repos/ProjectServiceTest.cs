@@ -201,4 +201,27 @@ public class AllModelsServiceTest
         userService.Delete(user);
         _context.SaveChanges();
     }
+    
+    // delete function tests
+    [Fact]
+    public async Task DeleteUserTest()
+    {
+        var userService = new ProjectService<User>(_context);
+        var user = new User
+        {
+            UserId = Guid.NewGuid(),
+            Username = "testuser",
+            Email = "testuser@example.com",
+            PasswordHash = "hashedpassword"
+        };
+        userService.Add(user);
+        _context.SaveChanges();
+
+        var del = userService.Delete(user);
+        Assert.True(del);
+
+        var dbUser = await _context.Users.FindAsync(user.UserId);
+        Assert.Null(dbUser);
+
+    }
 }

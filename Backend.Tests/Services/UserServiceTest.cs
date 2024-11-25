@@ -32,4 +32,23 @@ public class UserServiceTest
         uow.Users.Delete(user);
         uow.Complete();
     }
+    [Fact]
+    public async Task LoginTest()
+    {
+        // First register a user
+        UserService ust = new UserService(uow);
+        var res = await ust.Register("username", "password", "email");
+        Assert.True(res);
+        var user = uow.Users.GetAll().FirstOrDefault(u => u.Username == "username" && u.Email == "email");
+        Assert.NotNull(user);
+        // Then login
+        var log = await ust.Login("username", "password");
+        Assert.True(log);
+        
+        // Teardown
+        uow.Users.Delete(user);
+        uow.Complete();
+    }
+
+    
 }
