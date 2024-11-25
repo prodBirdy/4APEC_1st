@@ -23,4 +23,9 @@
       <ProjectReference Include="..\Model\Model.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Content Include="obj\Debug\net9.0\4APEC_1st.csproj.AssemblyReference.cache" />
+      <Content Include="obj\rider.project.model.nuget.info" />
+    </ItemGroup>
+
 </Project>
