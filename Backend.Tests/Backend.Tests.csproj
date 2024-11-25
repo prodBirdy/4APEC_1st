@@ -8,10 +8,12 @@
 
   <ItemGroup>
     <PackageReference Include="JetBrains.Annotations" Version="2024.3.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.12.0" />
     <PackageReference Include="xunit" Version="2.9.2" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\4APEC_1st\4APEC_1st.csproj" />
     <ProjectReference Include="..\Backend\Backend.csproj" />
   </ItemGroup>
   
