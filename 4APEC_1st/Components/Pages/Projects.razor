@@ -1,0 +1,95 @@
+@page "/Projects"
+@using BL
+@using Model
+@using BL.Repos
+@using BL.Data
+@inject Uow uow
+@rendermode InteractiveServer
+
+<h3>Projects</h3>
+
+<div class="container">
+    <div class="row mb-3">
+        <div class="col">
+            <button class="btn btn-primary" @onclick="ShowAddProjectModal">Add New Project</button>
+        </div>
+    </div>
+
+    @if (projects != null)
+    {
+        <div class="row">
+            @foreach (var project in projects)
+            {
+                <div class="col-md-4 mb-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">@project.Name</h5>
+                            <p class="card-text">@project.Description</p>
+                            <p class="card-text"><small class="text-muted">Status: @project.Status</small></p>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</div>
+
+@if (showModal)
+{
+    <div class="modal" tabindex="-1" style="display:block">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add New Project</h5>
+                    <button type="button" class="btn-close" @onclick="CloseModal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="projectName">Project Name</label>
+                        <input type="text" class="form-control" id="projectName" @bind="newProject.Name">
+                    </div>
+                    <div class="form-group">
+                        <label for="projectDescription">Description</label>
+                        <textarea class="form-control" id="projectDescription" @bind="newProject.Description"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" @onclick="CloseModal">Close</button>
+                    <button type="button" class="btn btn-primary" @onclick="AddProject">Save Project</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@code {
+    private List<Project> projects;
+    private bool showModal = false;
+    private Project newProject = new Project();
+
+
+    protected override void OnInitialized()
+    {
+        projects = uow.Projects.GetAll().ToList();
+    }
+
+    private void ShowAddProjectModal()
+    {
+        newProject = new Project();
+        showModal = true;
+    }
+
+    private void CloseModal()
+    {
+        showModal = false;
+    }
+
+    private void AddProject()
+    {
+        newProject.Status = ProjectStatus.NotStarted;
+        newProject.Manager = new User{ Username = "New", UserId = new Guid() , PasswordHash = "scsdsdsadadasd"};
+        uow.Projects.Add(newProject);
+        projects = uow.Projects.GetAll().ToList();
+        showModal = false;
+    }
+}

@@ -1,11 +1,9 @@
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using APEC_INF.Services;
 using BL;
 using BL.Data;
 using JetBrains.Annotations;
-using Model;
 using Xunit;
 
 namespace Backend.Tests.Services;

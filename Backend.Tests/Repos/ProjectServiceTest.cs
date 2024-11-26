@@ -224,4 +224,149 @@ public class AllModelsServiceTest
         Assert.Null(dbUser);
 
     }
+
+    [Fact]
+    public async Task DeleteProjectTest()
+    {
+        // First create a user
+        var userService = new ProjectService<User>(_context);
+        var user = new User
+        {
+            UserId = Guid.NewGuid(),
+            Username = "testuser",
+            Email = "testuser@example.com",
+            PasswordHash = "hashedpassword"
+        };
+        userService.Add(user);
+        _context.SaveChanges();
+
+        // Then create a project
+        var projectService = new ProjectService<Project>(_context);
+        var project = new Project
+        {
+            Name = "Test Project",
+            Description = "Test Description",
+            Status = ProjectStatus.NotStarted,
+            Manager = user,
+            
+        };
+        projectService.Add(project);
+        var del = projectService.Delete(project);
+        Assert.True(del);
+
+        var dbProject = await _context.Projects.FindAsync(project.Id);
+        Assert.Null(dbProject);
+    }
+
+    [Fact]
+    public async Task DeleteTaskEntriesTest()
+    {  
+        // First create a user
+        var userService = new ProjectService<User>(_context);
+        var user = new User
+        {
+            UserId = Guid.NewGuid(),
+            Username = "testuser",
+            Email = "testuser@example.com",
+            PasswordHash = "hashedpassword"
+        };
+        userService.Add(user);
+        _context.SaveChanges();
+
+        // Then create a project
+        var projectService = new ProjectService<Project>(_context);
+        var project = new Project
+        {
+            Name = "Test Project",
+            Description = "Test Description",
+            Status = ProjectStatus.NotStarted,
+            Manager = user
+        };
+        projectService.Add(project);
+        _context.SaveChanges();
+
+        // Then create a task entry
+        var taskEntriesService = new ProjectService<TaskEntries>(_context);
+        var taskEntry = new TaskEntries
+        {
+            Title = "Test Task",
+            Description = "Test Description",
+            Status = TaskStatus.NotStarted,
+            UserId = user.UserId,
+            ProjectId = project.Id,
+            User = user,
+            Project = project
+        };
+        taskEntriesService.Add(taskEntry);
+        _context.SaveChanges();
+
+    }
+
+    [Fact]
+    public async Task DeleteTimeEntriesTest()
+    {
+        // First create a user
+        var userService = new ProjectService<User>(_context);
+        var user = new User 
+        {
+            UserId = Guid.NewGuid(),
+            Username = "testuser",
+            Email = "testuser@example.com",
+            PasswordHash = "hashedpassword"
+        };
+        userService.Add(user);
+        _context.SaveChanges(); 
+
+        // Then create a project
+        var projectService = new ProjectService<Project>(_context);
+        var project = new Project
+        {
+            Name = "Test Project",
+            Description = "Test Description",
+            Status = ProjectStatus.NotStarted,
+            Manager = user
+        };
+        projectService.Add(project);
+        _context.SaveChanges();
+
+
+        // Then create a task entry
+        var taskEntriesService = new ProjectService<TaskEntries>(_context);
+        var taskEntry = new TaskEntries
+        {
+            Title = "Test Task",
+            Description = "Test Description",
+            Status = TaskStatus.NotStarted,
+            UserId = user.UserId,
+            ProjectId = project.Id,
+            User = user,
+        };
+        taskEntriesService.Add(taskEntry);
+        _context.SaveChanges();
+
+        // Then create a time entry
+        var timeEntriesService = new ProjectService<TimeEntries>(_context);
+        var timeEntry = new TimeEntries
+        {
+            StartTime = DateTime.Now,
+            EndTime = DateTime.Now.AddHours(1),
+            Duration = TimeSpan.FromHours(1),
+            UserId = user.UserId,
+            User = user,
+            TaskEntries = taskEntry
+        };
+        timeEntriesService.Add(timeEntry);
+        _context.SaveChanges();
+
+        var del = timeEntriesService.Delete(timeEntry);
+        Assert.True(del);
+
+        var dbTimeEntry = await _context.Times.FindAsync(timeEntry.Id);
+        Assert.Null(dbTimeEntry);
+        taskEntriesService.Delete(taskEntry);
+        projectService.Delete(project);
+        userService.Delete(user);
+        _context.SaveChanges();
+
+    }
 }
